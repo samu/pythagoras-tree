@@ -1,3 +1,6 @@
+// code taken from
+// http://www.webtutorialsource.com/tutorial/show-hide-toggle-sliding-menu-css-javascript/
+
 function toggle(id) {
   var el = document.getElementById(id);
   var img = document.getElementById("arrow");
