@@ -1,3 +1,3 @@
 # Pythagoras Tree
 
-![sample](samu.github.com/pythagoras-tree/sample.png)
+![sample](https://raw.github.com/samu/pythagoras-tree/gh-pages/sample.png)
