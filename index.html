@@ -121,7 +121,7 @@
     </script>
   </head>
 
-  <body style="background-color: black; margin: 5; padding: 0">
+  <body style="background-color: black; margin: 0; padding: 0">
 
     <div id="mainDiv" style="width:100%; height: 100%;">
       <canvas id="canvas" onmousedown="return false;" oncontextmenu="return false;"
@@ -143,15 +143,21 @@
       <div id="links">
         <table>
           <tr>
+            <td>Background</td>
+            <td>Start</td>
+            <td>End</td>
+          </tr>
+          <tr>
             <td><div id="backgroundColorPicker"></div></td>
             <td><div id="startColorPicker"></div></td>
             <td><div id="endColorPicker"></div></td>
           </tr>
         </table>
 
+        Branches:
         <div id="branchCountDiv">
-          <div id="branchCountIncrease" class="leftfloat bcButton bcIncrease"></div>
-          <div id="branchCountDecrease" class="leftfloat bcButton bcDecrease"></div>
+          <button id="branchCountIncrease">+</button>
+          <button id="branchCountDecrease">-</button>
         </div>
       </div>
     </div>
