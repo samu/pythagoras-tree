@@ -29,101 +29,99 @@
     <link rel="stylesheet" type="text/css" href="style/menu.css"></link>
 
     <script type="text/javascript">
+      var jq = $.noConflict();
+      var treeCanvas;
 
-    var jq = $.noConflict();
-    var treeCanvas;
+      jq(function() {
 
-    jq(function() {
+        var canvasElement = jq("#canvas").get(0);
+        treeCanvas = new TreeCanvas(canvasElement);
 
-      var canvasElement = jq("#canvas").get(0);
-      treeCanvas = new TreeCanvas(canvasElement);
+        canvasElement.addEventListener("mousemove", treeCanvasMousemove, false);
+        canvasElement.addEventListener("mousedown", treeCanvasMousedown, false);
+        canvasElement.addEventListener("mouseup", treeCanvasMouseup, false);
 
-      canvasElement.addEventListener("mousemove", treeCanvasMousemove, false);
-      canvasElement.addEventListener("mousedown", treeCanvasMousedown, false);
-      canvasElement.addEventListener("mouseup", treeCanvasMouseup, false);
+        jq('#branchCountIncrease').click(function() {
+          treeCanvas.branchCount++;
+          treeCanvas.dirty = true;
+          treeCanvas.onRepaint();
+        });
 
-      jq('#branchCountIncrease').click(function() {
-        treeCanvas.branchCount++;
-        treeCanvas.dirty = true;
-        treeCanvas.onRepaint();
+        jq('#branchCountDecrease').click(function() {
+          treeCanvas.branchCount--;
+          treeCanvas.dirty = true;
+          treeCanvas.onRepaint();
+        });
+
+        jq('#alternating').change(function(value) {
+          treeCanvas.alternating = value.srcElement.checked;
+          treeCanvas.dirty = true;
+          treeCanvas.onRepaint();
+        })
+
+        jq('#backgroundColorPicker').farbtastic();
+          jq.farbtastic("#backgroundColorPicker").linkTo(function(color) {
+            treeCanvas.background = color;
+            treeCanvas.onRepaint();
+          });
+
+          jq('#startColorPicker').farbtastic();
+          jq.farbtastic('#startColorPicker').linkTo(function(color) {
+            treeCanvas.startColor = color;
+            treeCanvas.onRepaint();
+          });
+
+          jq('#endColorPicker').farbtastic();
+          jq.farbtastic('#endColorPicker').linkTo(function(color) {
+            treeCanvas.endColor = color;
+            treeCanvas.onRepaint();
+          });
+
+
+        window.onresize = onResize;
+
+        onResize();
       });
 
-      jq('#branchCountDecrease').click(function() {
-        treeCanvas.branchCount--;
-        treeCanvas.dirty = true;
+      treeCanvasMousemove = function(e) {
+        treeCanvas.onMouseMove(e);
+      }
+
+      treeCanvasMousedown = function(e) {
+        treeCanvas.onMouseDown(e);
+      }
+
+      treeCanvasMouseup = function(e) {
+        treeCanvas.onMouseUp(e);
+      }
+
+      onResize = function() {
+        var mainDiv = jq("#mainDiv");
+        treeCanvas.onResize(mainDiv);
+      }
+
+      function getMousePoint(e) {
+        return new Point(e.offsetX, e.offsetY);
+      }
+
+      function toggleSnapToGrid() {
+        treeCanvas.mainMouseListener.snapToGrid = jq("#snapToGrid").attr('checked');
+      }
+
+      function toggleHighlightEdges() {
+        treeCanvas.highlightEdges = jq("#highlightEdges").attr('checked');
         treeCanvas.onRepaint();
-      });
+      }
 
-      jq('#alternating').change(function(value) {
-        treeCanvas.alternating = value.srcElement.checked;
-        treeCanvas.dirty = true;
+      function toggleShowDebugInfo() {
+        treeCanvas.showDebugInfo = jq("#showDebugInfo").attr('checked');
         treeCanvas.onRepaint();
-      })
+      }
 
-      jq('#backgroundColorPicker').farbtastic();
-        jq.farbtastic("#backgroundColorPicker").linkTo(function(color) {
-          treeCanvas.background = color;
-          treeCanvas.onRepaint();
-        });
-
-        jq('#startColorPicker').farbtastic();
-        jq.farbtastic('#startColorPicker').linkTo(function(color) {
-          treeCanvas.startColor = color;
-          treeCanvas.onRepaint();
-        });
-
-        jq('#endColorPicker').farbtastic();
-        jq.farbtastic('#endColorPicker').linkTo(function(color) {
-          treeCanvas.endColor = color;
-          treeCanvas.onRepaint();
-        });
-
-
-      window.onresize = onResize;
-
-      onResize();
-    });
-
-    treeCanvasMousemove = function(e) {
-      treeCanvas.onMouseMove(e);
-    }
-
-    treeCanvasMousedown = function(e) {
-      treeCanvas.onMouseDown(e);
-    }
-
-    treeCanvasMouseup = function(e) {
-      treeCanvas.onMouseUp(e);
-    }
-
-    onResize = function() {
-      var mainDiv = jq("#mainDiv");
-      treeCanvas.onResize(mainDiv);
-    }
-
-    function getMousePoint(e) {
-      return new Point(e.offsetX, e.offsetY);
-    }
-
-    function toggleSnapToGrid() {
-      treeCanvas.mainMouseListener.snapToGrid = jq("#snapToGrid").attr('checked');
-    }
-
-    function toggleHighlightEdges() {
-      treeCanvas.highlightEdges = jq("#highlightEdges").attr('checked');
-      treeCanvas.onRepaint();
-    }
-
-    function toggleShowDebugInfo() {
-      treeCanvas.showDebugInfo = jq("#showDebugInfo").attr('checked');
-      treeCanvas.onRepaint();
-    }
-
-    function hexToR(h) {return parseInt((cutHex(h)).substring(0,2),16)}
-    function hexToG(h) {return parseInt((cutHex(h)).substring(2,4),16)}
-    function hexToB(h) {return parseInt((cutHex(h)).substring(4,6),16)}
-    function cutHex(h) {return (h.charAt(0)=="#") ? h.substring(1,7):h}
-
+      function hexToR(h) {return parseInt((cutHex(h)).substring(0,2),16)}
+      function hexToG(h) {return parseInt((cutHex(h)).substring(2,4),16)}
+      function hexToB(h) {return parseInt((cutHex(h)).substring(4,6),16)}
+      function cutHex(h) {return (h.charAt(0)=="#") ? h.substring(1,7):h}
     </script>
   </head>
 
