@@ -1,14 +1,11 @@
 var ScaleTree = new Class({
-
   initialize: function(mainMouseListener) {
     this.mainMouseListener = mainMouseListener;
     this.mousePoint = new Point(0,0);
     this.originalMousePoint = null;
   },
 
-  onRepaint: function() {
-
-  },
+  onRepaint: function() { },
 
   onMouseUp: function(mouseEvent) {
     this.originalMousePoint = null;
@@ -39,13 +36,10 @@ var ScaleTree = new Class({
     this.mainMouseListener.treeCanvas.dirty = true;
   },
 
-  onMouseDown: function(mouseEvent) {
-
-  },
+  onMouseDown: function(mouseEvent) { },
 
   onMouseMove: function(mouseEvent) {
     this.mousePoint.x = mouseEvent.offsetX;
     this.mousePoint.y = mouseEvent.offsetY;
   }
-
 });

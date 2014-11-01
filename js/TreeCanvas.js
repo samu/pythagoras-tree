@@ -1,5 +1,4 @@
 var TreeCanvas = new Class({
-
   initialize: function(canvasElement) {
     var vector = new Array(600, 200);
 
@@ -74,5 +73,4 @@ var TreeCanvas = new Class({
   addDrawingStrategy: function(drawingStrategy) {
     this.drawingStrategies.push(drawingStrategy);
   }
-
 });

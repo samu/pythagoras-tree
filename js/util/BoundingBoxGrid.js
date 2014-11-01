@@ -1,5 +1,4 @@
 var BoundingBoxGrid = new Class({
-
   initialize: function(divCount, gridArea, boundingBoxes) {
     this.divCount = divCount;
     this.grid = multiDimensionalArray(divCount, divCount);
@@ -37,5 +36,4 @@ var BoundingBoxGrid = new Class({
       arr.push(bb);
     }
   }
-
 });

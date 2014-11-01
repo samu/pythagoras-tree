@@ -25,9 +25,7 @@ var MoveTree = new Class({
     this.mainMouseListener.treeCanvas.dirty = true;
   },
 
-  onMouseDown: function(mouseEvent) {
-
-  },
+  onMouseDown: function(mouseEvent) { },
 
   onMouseMove: function(mouseEvent) {
     this.mousePoint.x = mouseEvent.offsetX;

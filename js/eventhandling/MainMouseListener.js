@@ -1,7 +1,5 @@
 var MainMouseListener = new Class({
-
   initialize: function(treeCanvas) {
-
     this.treeCanvas = treeCanvas;
 
     this.mouseDown = false;
@@ -122,7 +120,6 @@ var MainMouseListener = new Class({
   updateMoveArea: function() {
     this.moveArea = new Point(this.bigBB.p2.x + this.moveAreaWidth + 2 * this.resizeAreaWidth + 2, this.bigBB.p2.y + this.moveAreaWidth + 2 * this.resizeAreaWidth + 2);
   }
-
 });
 
 var AreaDrawingStrategy = new Class({
@@ -138,8 +135,8 @@ var AreaDrawingStrategy = new Class({
     }
     return val;
   },
-  draw: function(canvas) {
 
+  draw: function(canvas) {
     var rs = hexToR(this.obj.treeCanvas.background);
       var gs = hexToG(this.obj.treeCanvas.background);
       var bs = hexToB(this.obj.treeCanvas.background);

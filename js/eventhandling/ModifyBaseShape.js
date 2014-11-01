@@ -1,5 +1,4 @@
 var ModifyBaseShape = new Class({
-
   initialize: function(mainMouseListener) {
     this.designatedBoundingBoxes = new Array();
     this.selectedPoint = null;
@@ -99,14 +98,6 @@ var ModifyBaseShape = new Class({
             after = this.mainMouseListener.treeCanvas.basePolygon.edges[getIndex(i + 1, this.mainMouseListener.treeCanvas.basePolygon.edges.length)];
           }
         }
-        /*
-        if (before != null && after != null) {//if statement can probably be removed...
-          var nearest = BasicMath.getClosestPoint(new Line(before, after), this.selectedPoint);
-          if (BasicMath.calculateDistance(this.selectedPoint, nearest) < this.mainMouseListener.tolerance) {
-            this.selectedPoint.x = nearest.x;
-            this.selectedPoint.y = nearest.y;
-          }
-        }*/
       }
       this.mainMouseListener.treeCanvas.dirty = true;
     } else {
@@ -210,4 +201,5 @@ var DrawDesignatedBoundingBoxesCount = new Class({
     canvas.fillText(designatedBoundingBoxes.length, 2,30);
 
   }
+
 });

@@ -39,14 +39,14 @@ BasicMath.getClosestPoint = function(line, p3) {
 }
 
 BasicMath.getCrossProduct = function(p0, p1, p2){
-    var x0 = p0.x;
-    var y0 = p0.y;
-    var x1 = p1.x;
-    var y1 = p1.y;
-    var x2 = p2.x;
-    var y2 = p2.y;
-    var crossproduct = (x1 - x0) * (y2 - y1) - (y1 - y0) * (x2 - x1);
-    return crossproduct;
+  var x0 = p0.x;
+  var y0 = p0.y;
+  var x1 = p1.x;
+  var y1 = p1.y;
+  var x2 = p2.x;
+  var y2 = p2.y;
+  var crossproduct = (x1 - x0) * (y2 - y1) - (y1 - y0) * (x2 - x1);
+  return crossproduct;
 }
 
 BasicMath.liesInPolygon = function(point, polygon) {
