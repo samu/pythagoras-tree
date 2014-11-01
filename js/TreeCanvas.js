@@ -64,8 +64,8 @@ var TreeCanvas = new Class({
   },
 
   onResize: function(mainDiv) {
-    this.canvas.canvas.width = mainDiv.width() - 200;
-    this.canvas.canvas.height = mainDiv.height() - 100;
+    this.canvas.canvas.width = mainDiv.width();
+    this.canvas.canvas.height = mainDiv.height();
     this.dirty = true;
     this.onRepaint();
   },

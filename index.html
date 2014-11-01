@@ -5,6 +5,8 @@
     <script type="text/javascript" src="js/frameworks/jquery-1.7.2.min.js"></script>
     <script type="text/javascript" src="js/frameworks/farbtastic.js"></script>
 
+    <script type="text/javascript" src="js/menu.js"></script>
+
     <script type="text/javascript" src="js/eventhandling/MainMouseListener.js"></script>
     <script type="text/javascript" src="js/eventhandling/ModifyBaseShape.js"></script>
     <script type="text/javascript" src="js/eventhandling/MoveTree.js"></script>
@@ -24,6 +26,7 @@
 
     <link rel="stylesheet" type="text/css" href="style/branchCount.css"></link>
     <link rel="stylesheet" type="text/css" href="style/farbtastic.css"></link>
+    <link rel="stylesheet" type="text/css" href="style/menu.css"></link>
 
     <script type="text/javascript">
 
@@ -119,29 +122,37 @@
   </head>
 
   <body style="background-color: black; margin: 5; padding: 0">
-    <div id="mainDiv" style="width:100%; height: 100%;">
-      <table>
-        <tr>
-          <td rowspan="3">
-            <canvas id="canvas" onmousedown="return false;" oncontextmenu="return false;" style="background-color: EEEEFF;"></canvas>
-          </td>
-          <td><div id="backgroundColorPicker"></div></td>
-        </tr>
-        <tr><td><div id="startColorPicker"></div></td></tr>
-        <tr><td><div id="endColorPicker"></div></td></tr>
 
-      </table>
+    <div id="mainDiv" style="width:100%; height: 100%;">
+      <canvas id="canvas" onmousedown="return false;" oncontextmenu="return false;"
+              style="background-color: EEEEFF;"></canvas>
 
       <div>
         <input type=checkbox id="snapToGrid"     onchange="toggleSnapToGrid();" />Salami
         <input type=checkbox id="highlightEdges" onchange="toggleHighlightEdges();" />Salami
         <input type=checkbox id="showDebugInfo" onchange="toggleShowDebugInfo();" />Salami
       </div>
+    </div>
 
-      <div id="branchCountDiv">
-        <input type="text" id="branchCount" class="leftfloat"/>
-        <div id="branchCountIncrease" class="leftfloat bcButton bcIncrease"></div>
-        <div id="branchCountDecrease" class="leftfloat bcButton bcDecrease"></div>
+    <div id="menubox" class="hide">
+      <ul id="tab">
+        <li>
+          <img id="arrow" onclick="toggle('menubox');" src="style/arrowleft.png">
+        </li>
+      </ul>
+      <div id="links">
+        <table>
+          <tr>
+            <td><div id="backgroundColorPicker"></div></td>
+            <td><div id="startColorPicker"></div></td>
+            <td><div id="endColorPicker"></div></td>
+          </tr>
+        </table>
+
+        <div id="branchCountDiv">
+          <div id="branchCountIncrease" class="leftfloat bcButton bcIncrease"></div>
+          <div id="branchCountDecrease" class="leftfloat bcButton bcDecrease"></div>
+        </div>
       </div>
     </div>
   </body>
