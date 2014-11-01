@@ -5,7 +5,6 @@ var PythagorasTree = new Class({
     this.alternating = alternating;
     this.alternatingStepsMax = alternatingStepsMax;
 
-
     this.bottomLength = BasicMath.calculateDistance(basePolygon.edges[corners[2]], basePolygon.edges[corners[3]]);
     this.leftLength = BasicMath.calculateDistance(basePolygon.edges[corners[0]], edge);
     this.rightLength = BasicMath.calculateDistance(basePolygon.edges[corners[1]], edge);
@@ -24,7 +23,7 @@ var PythagorasTree = new Class({
     this.bodies = new Array();
 
     this.addToList(basePolygon, 0);
-    this.calculate(basePolygon, branches, 1, false, 0);
+    this.calculate(basePolygon, branches, 1, this.alternating, 0);
   },
 
   addToList: function(polygon, layer) {
@@ -82,7 +81,6 @@ var PythagorasTree = new Class({
   },
 
   draw: function(canvas, startColor, endColor, highlightEdges) {
-
     var rs = hexToR(startColor);
     var gs = hexToG(startColor);
     var bs = hexToB(startColor);

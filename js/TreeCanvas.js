@@ -27,6 +27,8 @@ var TreeCanvas = new Class({
     this.startColor = "#000000";
     this.endColor = "#FFFFFF";
 
+    this.alternating = false;
+
     this.mainMouseListener.onMouseUp();
   },
 
@@ -48,7 +50,7 @@ var TreeCanvas = new Class({
     this.canvas.fillStyle = this.background;
 
     if (this.dirty) {
-      this.tree = new PythagorasTree(this.branchCount, this.basePolygon, this.corners, this.edge, true, 3);
+      this.tree = new PythagorasTree(this.branchCount, this.basePolygon, this.corners, this.edge, this.alternating, 3);
       this.dirty = false;
       this.canvas.fillRect(0, 0, this.canvas.canvas.width, this.canvas.canvas.height);
       this.tree.draw(this.canvas, this.startColor, this.endColor, this.highlightEdges);

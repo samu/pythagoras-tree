@@ -54,6 +54,12 @@
         treeCanvas.onRepaint();
       });
 
+      jq('#alternating').change(function(value) {
+        treeCanvas.alternating = value.srcElement.checked;
+        treeCanvas.dirty = true;
+        treeCanvas.onRepaint();
+      })
+
       jq('#backgroundColorPicker').farbtastic();
         jq.farbtastic("#backgroundColorPicker").linkTo(function(color) {
           treeCanvas.background = color;
@@ -126,12 +132,6 @@
     <div id="mainDiv" style="width:100%; height: 100%;">
       <canvas id="canvas" onmousedown="return false;" oncontextmenu="return false;"
               style="background-color: EEEEFF;"></canvas>
-
-      <div>
-        <input type=checkbox id="snapToGrid"     onchange="toggleSnapToGrid();" />Salami
-        <input type=checkbox id="highlightEdges" onchange="toggleHighlightEdges();" />Salami
-        <input type=checkbox id="showDebugInfo" onchange="toggleShowDebugInfo();" />Salami
-      </div>
     </div>
 
     <div id="menubox" class="hide">
@@ -158,6 +158,14 @@
         <div id="branchCountDiv">
           <button id="branchCountIncrease">+</button>
           <button id="branchCountDecrease">-</button>
+        </div>
+
+        <input id="alternating" type="checkbox"></input>
+
+        <div>
+          <input type=checkbox id="snapToGrid"     onchange="toggleSnapToGrid();" />
+          <input type=checkbox id="highlightEdges" onchange="toggleHighlightEdges();" />
+          <input type=checkbox id="showDebugInfo" onchange="toggleShowDebugInfo();" />
         </div>
       </div>
     </div>
