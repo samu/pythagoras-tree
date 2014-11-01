@@ -7,7 +7,7 @@ http://www.webtutorialsource.com/tutorial/show-hide-toggle-sliding-menu-css-java
   width: 660px;
   font-size: 12px;
   line-height: 20px;
-  right: -610px;
+  right: -620px;
   top: 0%; /* change this value to place the menu higher or lower */
   position: fixed;
   z-index: 100;
@@ -28,11 +28,12 @@ http://www.webtutorialsource.com/tutorial/show-hide-toggle-sliding-menu-css-java
   position: relative;
 }
 
-#links{
-  width: 80px;
+#menuContent{
+  width: 595px;
   padding: 10px;
   float: left;
   border-left: 1px solid #B4B8BB;
+  background-color: rgba(0, 0, 0, 0.8)
 }
 
 .show, .hide{
