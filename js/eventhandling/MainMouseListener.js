@@ -10,7 +10,7 @@ var MainMouseListener = new Class({
     this.lines = new Array();
 
     this.boundingBoxGrid = null;
-    this.tolerance = 8;
+    this.tolerance = 10;
     this.split = 1;
     this.gridDivs = 50;
 
@@ -30,10 +30,10 @@ var MainMouseListener = new Class({
     this.moveAreaWidth = 10;
     this.moveAreaRadius = Math.round(BasicMath.calculateDistance(new Point(0, 0), new Point(this.moveAreaWidth, this.moveAreaWidth)));
 
-    this.drawResizeAreaLight = new DrawResizeArea(this, false);
-    this.drawResizeAreaStrong = new DrawResizeArea(this, true);
-    this.drawMoveAreaLight = new DrawMoveArea(this, false);
-    this.drawMoveAreaStrong = new DrawMoveArea(this, true);
+    this.drawResizeAreaLight = new DrawResizeArea(this, treeCanvas, false);
+    this.drawResizeAreaStrong = new DrawResizeArea(this, treeCanvas, true);
+    this.drawMoveAreaLight = new DrawMoveArea(this, treeCanvas, false);
+    this.drawMoveAreaStrong = new DrawMoveArea(this, treeCanvas, true);
   },
 
   onRepaint: function() {
@@ -123,8 +123,9 @@ var MainMouseListener = new Class({
 });
 
 var AreaDrawingStrategy = new Class({
-  initialize: function(obj, strong) {
-    this.obj = obj;
+  initialize: function(listener, treeCanvas, strong) {
+    this.listener = listener;
+    this.treeCanvas = treeCanvas;
     this.strong = strong;
   },
 
@@ -137,9 +138,9 @@ var AreaDrawingStrategy = new Class({
   },
 
   draw: function(canvas) {
-    var rs = hexToR(this.obj.treeCanvas.background);
-      var gs = hexToG(this.obj.treeCanvas.background);
-      var bs = hexToB(this.obj.treeCanvas.background);
+    var rs = hexToR(this.treeCanvas.background);
+    var gs = hexToG(this.treeCanvas.background);
+    var bs = hexToB(this.treeCanvas.background);
 
     rs = this.inv(rs);
     gs = this.inv(gs);
@@ -161,13 +162,13 @@ var AreaDrawingStrategy = new Class({
 var DrawResizeArea = new Class({
   Extends: AreaDrawingStrategy,
   customDraw: function(canvas) {
-    canvas.arc(this.obj.resizeArea.x, this.obj.resizeArea.y, this.obj.resizeAreaRadius, 0, 360, false);
+    canvas.arc(this.listener.resizeArea.x, this.listener.resizeArea.y, this.listener.resizeAreaRadius, 0, 360, false);
   }
 });
 
 var DrawMoveArea = new Class({
   Extends: AreaDrawingStrategy,
   customDraw: function(canvas) {
-    canvas.arc(this.obj.moveArea.x, this.obj.moveArea.y, this.obj.moveAreaRadius, 0, 360, false);
+    canvas.arc(this.listener.moveArea.x, this.listener.moveArea.y, this.listener.moveAreaRadius, 0, 360, false);
   }
 });

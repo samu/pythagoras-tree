@@ -11,7 +11,6 @@ http://www.webtutorialsource.com/tutorial/show-hide-toggle-sliding-menu-css-java
   top: 0%; /* change this value to place the menu higher or lower */
   position: fixed;
   z-index: 100;
-  background-color: white;
 }
 
 #tab{

@@ -1,11 +1,16 @@
 var TreeCanvas = new Class({
-  initialize: function(canvasElement) {
-    var vector = new Array(600, 200);
+  initialize: function(canvasElement, mainDiv) {
+    var initialWidth = 100;
+    var initialHeight = 80;
+    var vector = new Array(mainDiv.width() / 2, mainDiv.height() / 2);
 
-    this.basePolygon = new Polygon(BasicMath.calculateRectangleEdges(0,0,50,50)).transform(vector);
-    this.edge = new Point(25,-30).transform(vector);
-    this.corners = new Array(0,1,2,3);
-    this.branchCount = 4;
+    this.basePolygon = new Polygon(
+      BasicMath.calculateRectangleEdges(0, 0, initialWidth, initialHeight)
+    ).transform(vector);
+    this.basePolygon.edges[0] = this.basePolygon.edges[0].transform([20, 0]);
+    this.edge = new Point(80, -50).transform(vector);
+    this.corners = new Array(0, 1, 2, 3);
+    this.branchCount = 7;
 
     this.tree = null;
 
@@ -23,9 +28,9 @@ var TreeCanvas = new Class({
     this.highlightEdges = false;
     this.showDebugInfo = false;
 
-    this.background = "#FFFFFF";
-    this.startColor = "#000000";
-    this.endColor = "#FFFFFF";
+    this.background = "#010026";
+    this.startColor = "#000e6e";
+    this.endColor = "#a1a6ff";
 
     this.alternating = false;
 

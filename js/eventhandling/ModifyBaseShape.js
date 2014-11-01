@@ -6,7 +6,7 @@ var ModifyBaseShape = new Class({
     this.isExistingPoint = false;
     this.mousePoint = new Point(0,0);
 
-    this.drawSelectedPoint = new DrawSelectedPoint(this);
+    this.drawSelectedPoint = new DrawSelectedPoint(this, mainMouseListener.treeCanvas, false);
     this.drawDesignatedBoundingBoxes = new DrawDesignatedBoundingBoxes();
     this.drawDesignatedBoundingBoxesCount = new DrawDesignatedBoundingBoxesCount();
 
@@ -167,19 +167,28 @@ var ModifyBaseShape = new Class({
 
 });
 
-var DrawSelectedPoint = new Class({
-  initialize: function(obj) {
-    this.obj = obj;
-  },
+// var DrawResizeArea = new Class({
+//   Extends: AreaDrawingStrategy,
+//   customDraw: function(canvas) {
+//     canvas.arc(this.listener.resizeArea.x, this.listener.resizeArea.y, this.listener.resizeAreaRadius, 0, 360, false);
+//   }
+// });
 
-  draw: function(canvas) {
-    if (this.obj.selectedPoint != null) {
-      canvas.fillStyle = "rgba(255, 0, 0, 1)";
-      var r = 3;
-      canvas.beginPath();
-      canvas.arc(Math.round(this.obj.selectedPoint.x), Math.round(this.obj.selectedPoint.y), r, 0, 360, false);
-      canvas.fill();
-      canvas.closePath();
+
+var DrawSelectedPoint = new Class({
+  Extends: AreaDrawingStrategy,
+  // initialize: function(listener) {
+  //   this.listener = listener;
+  // },
+
+  customDraw: function(canvas) {
+    if (this.listener.selectedPoint != null) {
+      // canvas.fillStyle = "rgba(255, 0, 0, 1)";
+      var r = this.listener.mainMouseListener.tolerance;
+      // canvas.beginPath();
+      canvas.arc(Math.round(this.listener.selectedPoint.x), Math.round(this.listener.selectedPoint.y), r, 0, 360, false);
+      // canvas.fill();
+      // canvas.closePath();
     }
   }
 });
@@ -201,5 +210,4 @@ var DrawDesignatedBoundingBoxesCount = new Class({
     canvas.fillText(designatedBoundingBoxes.length, 2,30);
 
   }
-
 });
