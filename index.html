@@ -66,9 +66,7 @@
 
         <div>
           Snapp to grid
-          <input type=checkbox id="snapToGrid"     onchange="toggleSnapToGrid();" />
-          <input type=checkbox id="highlightEdges" onchange="toggleHighlightEdges();" />
-          <input type=checkbox id="showDebugInfo" onchange="toggleShowDebugInfo();" />
+          <input type=checkbox id="snapToGrid" />
         </div>
       </div>
     </div>
@@ -103,23 +101,27 @@
         treeCanvas.onRepaint();
       })
 
+      jq('#snapToGrid').change(function(value) {
+        treeCanvas.snapToGrid = value.srcElement.checked;
+      })
+
       jq('#backgroundColorPicker').farbtastic();
-        jq.farbtastic("#backgroundColorPicker").linkTo(function(color) {
-          treeCanvas.background = color;
-          treeCanvas.onRepaint();
-        });
+      jq.farbtastic("#backgroundColorPicker").linkTo(function(color) {
+        treeCanvas.background = color;
+        treeCanvas.onRepaint();
+      });
 
-        jq('#startColorPicker').farbtastic();
-        jq.farbtastic('#startColorPicker').linkTo(function(color) {
-          treeCanvas.startColor = color;
-          treeCanvas.onRepaint();
-        });
+      jq('#startColorPicker').farbtastic();
+      jq.farbtastic('#startColorPicker').linkTo(function(color) {
+        treeCanvas.startColor = color;
+        treeCanvas.onRepaint();
+      });
 
-        jq('#endColorPicker').farbtastic();
-        jq.farbtastic('#endColorPicker').linkTo(function(color) {
-          treeCanvas.endColor = color;
-          treeCanvas.onRepaint();
-        });
+      jq('#endColorPicker').farbtastic();
+      jq.farbtastic('#endColorPicker').linkTo(function(color) {
+        treeCanvas.endColor = color;
+        treeCanvas.onRepaint();
+      });
 
       window.onresize = onResize;
 
@@ -147,23 +149,5 @@
       return new Point(e.offsetX, e.offsetY);
     }
 
-    function toggleSnapToGrid() {
-      treeCanvas.snapToGrid = jq("#snapToGrid").attr('checked');
-    }
-
-    function toggleHighlightEdges() {
-      treeCanvas.highlightEdges = jq("#highlightEdges").attr('checked');
-      treeCanvas.onRepaint();
-    }
-
-    function toggleShowDebugInfo() {
-      treeCanvas.showDebugInfo = jq("#showDebugInfo").attr('checked');
-      treeCanvas.onRepaint();
-    }
-
-    function hexToR(h) {return parseInt((cutHex(h)).substring(0,2),16)}
-    function hexToG(h) {return parseInt((cutHex(h)).substring(2,4),16)}
-    function hexToB(h) {return parseInt((cutHex(h)).substring(4,6),16)}
-    function cutHex(h) {return (h.charAt(0)=="#") ? h.substring(1,7):h}
   </script>
 </html>
