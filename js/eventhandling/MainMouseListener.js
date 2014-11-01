@@ -23,8 +23,6 @@ var MainMouseListener = new Class({
     this.mouseListener = this.modifyBaseShape;
     this.mouseDown = false;
 
-    this.snapToGrid = false;
-
     this.resizeAreaWidth = 9;
     this.resizeAreaRadius = Math.round(BasicMath.calculateDistance(new Point(0, 0), new Point(this.resizeAreaWidth, this.resizeAreaWidth)));
     this.moveAreaWidth = 10;

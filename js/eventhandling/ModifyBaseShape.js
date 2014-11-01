@@ -94,8 +94,8 @@ var ModifyBaseShape = new Class({
               this.selectedPoint.y = point.y;
             }
           } else {
-            before = this.mainMouseListener.treeCanvas.basePolygon.edges[getIndex(i - 1, this.mainMouseListener.treeCanvas.basePolygon.edges.length)];
-            after = this.mainMouseListener.treeCanvas.basePolygon.edges[getIndex(i + 1, this.mainMouseListener.treeCanvas.basePolygon.edges.length)];
+            before = this.mainMouseListener.treeCanvas.basePolygon.edges[this.getIndex(i - 1, this.mainMouseListener.treeCanvas.basePolygon.edges.length)];
+            after = this.mainMouseListener.treeCanvas.basePolygon.edges[this.getIndex(i + 1, this.mainMouseListener.treeCanvas.basePolygon.edges.length)];
           }
         }
       }

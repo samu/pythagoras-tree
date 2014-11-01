@@ -34,6 +34,8 @@ var TreeCanvas = new Class({
 
     this.alternating = false;
 
+    this.snapToGrid = false;
+
     this.mainMouseListener.onMouseUp();
   },
 

@@ -65,6 +65,7 @@
         <input id="alternating" type="checkbox"></input>
 
         <div>
+          Snapp to grid
           <input type=checkbox id="snapToGrid"     onchange="toggleSnapToGrid();" />
           <input type=checkbox id="highlightEdges" onchange="toggleHighlightEdges();" />
           <input type=checkbox id="showDebugInfo" onchange="toggleShowDebugInfo();" />
@@ -147,7 +148,7 @@
     }
 
     function toggleSnapToGrid() {
-      treeCanvas.mainMouseListener.snapToGrid = jq("#snapToGrid").attr('checked');
+      treeCanvas.snapToGrid = jq("#snapToGrid").attr('checked');
     }
 
     function toggleHighlightEdges() {
