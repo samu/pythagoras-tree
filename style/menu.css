@@ -33,7 +33,14 @@ http://www.webtutorialsource.com/tutorial/show-hide-toggle-sliding-menu-css-java
   padding: 10px;
   float: left;
   border-left: 1px solid #B4B8BB;
-  background-color: rgba(0, 0, 0, 0.8)
+  background-color: rgba(0, 0, 0, 0.8);
+  font-size: 14;
+  color: white;
+}
+
+table {
+  font-size: 14;
+  color: white;
 }
 
 .show, .hide{
