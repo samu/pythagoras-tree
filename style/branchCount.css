@@ -1,18 +1,18 @@
 .leftfloat {
-	float: left;
+  float: left;
 }
 
 .bcButton {
-	width: 15px;
-	height: 15px;
-	margin-top: 5px;
-	margin-left: 5px;
+  width: 15px;
+  height: 15px;
+  margin-top: 5px;
+  margin-left: 5px;
 }
 
 .bcIncrease {
-	background: green;
+  background: green;
 }
 
 .bcDecrease {
-	background: red;
+  background: red;
 }

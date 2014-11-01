@@ -1,148 +1,148 @@
 <html>
-	<head>
-		
-		<script type="text/javascript" src="js/frameworks/mootools-core-1.4.5-full-compat.js"></script>
-		<script type="text/javascript" src="js/frameworks/jquery-1.7.2.min.js"></script>
-		<script type="text/javascript" src="js/frameworks/farbtastic.js"></script>
-				
-		<script type="text/javascript" src="js/eventhandling/MainMouseListener.js"></script>
-		<script type="text/javascript" src="js/eventhandling/ModifyBaseShape.js"></script>
-		<script type="text/javascript" src="js/eventhandling/MoveTree.js"></script>
-		<script type="text/javascript" src="js/eventhandling/ScaleTree.js"></script>	
-				
-		<script type="text/javascript" src="js/geometry/Line.js"></script>
-		<script type="text/javascript" src="js/geometry/Point.js"></script>
-		<script type="text/javascript" src="js/geometry/Polygon.js"></script>		
-		<script type="text/javascript" src="js/geometry/PythagorasTree.js"></script>
-		
-		<script type="text/javascript" src="js/util/BasicMath.js"></script>	
-		<script type="text/javascript" src="js/util/BoundingBox.js"></script>	
-		<script type="text/javascript" src="js/util/BoundingBoxGrid.js"></script>	
-		<script type="text/javascript" src="js/util/Utility.js"></script>	
-		
-		<script type="text/javascript" src="js/TreeCanvas.js"></script>
+  <head>
 
-		<link rel="stylesheet" type="text/css" href="style/branchCount.css"></link>
-		<link rel="stylesheet" type="text/css" href="style/farbtastic.css"></link>
+    <script type="text/javascript" src="js/frameworks/mootools-core-1.4.5-full-compat.js"></script>
+    <script type="text/javascript" src="js/frameworks/jquery-1.7.2.min.js"></script>
+    <script type="text/javascript" src="js/frameworks/farbtastic.js"></script>
 
-		<script type="text/javascript">
+    <script type="text/javascript" src="js/eventhandling/MainMouseListener.js"></script>
+    <script type="text/javascript" src="js/eventhandling/ModifyBaseShape.js"></script>
+    <script type="text/javascript" src="js/eventhandling/MoveTree.js"></script>
+    <script type="text/javascript" src="js/eventhandling/ScaleTree.js"></script>
 
-		var jq = $.noConflict();
-		var treeCanvas;
-		
-		jq(function() {
+    <script type="text/javascript" src="js/geometry/Line.js"></script>
+    <script type="text/javascript" src="js/geometry/Point.js"></script>
+    <script type="text/javascript" src="js/geometry/Polygon.js"></script>
+    <script type="text/javascript" src="js/geometry/PythagorasTree.js"></script>
 
-			var canvasElement = jq("#canvas").get(0);
-			treeCanvas = new TreeCanvas(canvasElement);
-			
-			canvasElement.addEventListener("mousemove", treeCanvasMousemove, false);
-			canvasElement.addEventListener("mousedown", treeCanvasMousedown, false);
-			canvasElement.addEventListener("mouseup", treeCanvasMouseup, false);
-			
-			jq('#branchCountIncrease').click(function() {
-				treeCanvas.branchCount++;
-				treeCanvas.dirty = true;
-				treeCanvas.onRepaint();
-			});
-			
-			jq('#branchCountDecrease').click(function() {
-				treeCanvas.branchCount--;
-				treeCanvas.dirty = true;
-				treeCanvas.onRepaint();
-			});
-			
-			jq('#backgroundColorPicker').farbtastic();
-				jq.farbtastic("#backgroundColorPicker").linkTo(function(color) {
-					treeCanvas.background = color;
-					treeCanvas.onRepaint();
-				});
-				
-				jq('#startColorPicker').farbtastic();
-				jq.farbtastic('#startColorPicker').linkTo(function(color) {
-					treeCanvas.startColor = color;
-					treeCanvas.onRepaint();
-				});
-				
-				jq('#endColorPicker').farbtastic();
-				jq.farbtastic('#endColorPicker').linkTo(function(color) {
-					treeCanvas.endColor = color;
-					treeCanvas.onRepaint();
-				});
-			
-			
-			window.onresize = onResize;
-			
-			onResize();
-		});
-		
-		treeCanvasMousemove = function(e) {
-			treeCanvas.onMouseMove(e);
-		}	
-		
-		treeCanvasMousedown = function(e) {
-			treeCanvas.onMouseDown(e);
-		}
-		
-		treeCanvasMouseup = function(e) {
-			treeCanvas.onMouseUp(e);
-		}
-		
-		onResize = function() {
-			var mainDiv = jq("#mainDiv");
-			treeCanvas.onResize(mainDiv);
-		}
-		
-		function getMousePoint(e) {
-			return new Point(e.offsetX, e.offsetY);
-		}
-		
-		function toggleSnapToGrid() {
-			treeCanvas.mainMouseListener.snapToGrid = jq("#snapToGrid").attr('checked');
-		}
-		
-		function toggleHighlightEdges() {
-			treeCanvas.highlightEdges = jq("#highlightEdges").attr('checked');
-			treeCanvas.onRepaint();
-		}
-		
-		function toggleShowDebugInfo() {
-			treeCanvas.showDebugInfo = jq("#showDebugInfo").attr('checked');
-			treeCanvas.onRepaint();
-		}
+    <script type="text/javascript" src="js/util/BasicMath.js"></script>
+    <script type="text/javascript" src="js/util/BoundingBox.js"></script>
+    <script type="text/javascript" src="js/util/BoundingBoxGrid.js"></script>
+    <script type="text/javascript" src="js/util/Utility.js"></script>
 
-		function hexToR(h) {return parseInt((cutHex(h)).substring(0,2),16)}
-		function hexToG(h) {return parseInt((cutHex(h)).substring(2,4),16)}
-		function hexToB(h) {return parseInt((cutHex(h)).substring(4,6),16)}
-		function cutHex(h) {return (h.charAt(0)=="#") ? h.substring(1,7):h}
+    <script type="text/javascript" src="js/TreeCanvas.js"></script>
 
-		</script>
-	</head>
-	
-	<body style="background-color: black; margin: 5; padding: 0">
-		<div id="mainDiv" style="width:100%; height: 100%;">
-			<table>
-				<tr>
-					<td rowspan="3">
-						<canvas id="canvas" onmousedown="return false;" oncontextmenu="return false;" style="background-color: EEEEFF;"></canvas>
-					</td>
-					<td><div id="backgroundColorPicker"></div></td>
-				</tr>
-				<tr><td><div id="startColorPicker"></div></td></tr>
-				<tr><td><div id="endColorPicker"></div></td></tr>
-				
-			</table>
+    <link rel="stylesheet" type="text/css" href="style/branchCount.css"></link>
+    <link rel="stylesheet" type="text/css" href="style/farbtastic.css"></link>
 
-			<div>
-				<input type=checkbox id="snapToGrid"     onchange="toggleSnapToGrid();" />Salami
-				<input type=checkbox id="highlightEdges" onchange="toggleHighlightEdges();" />Salami
-				<input type=checkbox id="showDebugInfo" onchange="toggleShowDebugInfo();" />Salami
-			</div>
-			
-			<div id="branchCountDiv">
-				<input type="text" id="branchCount" class="leftfloat"/>
-				<div id="branchCountIncrease" class="leftfloat bcButton bcIncrease"></div>
-				<div id="branchCountDecrease" class="leftfloat bcButton bcDecrease"></div>
-			</div>
-		</div>
-	</body>
+    <script type="text/javascript">
+
+    var jq = $.noConflict();
+    var treeCanvas;
+
+    jq(function() {
+
+      var canvasElement = jq("#canvas").get(0);
+      treeCanvas = new TreeCanvas(canvasElement);
+
+      canvasElement.addEventListener("mousemove", treeCanvasMousemove, false);
+      canvasElement.addEventListener("mousedown", treeCanvasMousedown, false);
+      canvasElement.addEventListener("mouseup", treeCanvasMouseup, false);
+
+      jq('#branchCountIncrease').click(function() {
+        treeCanvas.branchCount++;
+        treeCanvas.dirty = true;
+        treeCanvas.onRepaint();
+      });
+
+      jq('#branchCountDecrease').click(function() {
+        treeCanvas.branchCount--;
+        treeCanvas.dirty = true;
+        treeCanvas.onRepaint();
+      });
+
+      jq('#backgroundColorPicker').farbtastic();
+        jq.farbtastic("#backgroundColorPicker").linkTo(function(color) {
+          treeCanvas.background = color;
+          treeCanvas.onRepaint();
+        });
+
+        jq('#startColorPicker').farbtastic();
+        jq.farbtastic('#startColorPicker').linkTo(function(color) {
+          treeCanvas.startColor = color;
+          treeCanvas.onRepaint();
+        });
+
+        jq('#endColorPicker').farbtastic();
+        jq.farbtastic('#endColorPicker').linkTo(function(color) {
+          treeCanvas.endColor = color;
+          treeCanvas.onRepaint();
+        });
+
+
+      window.onresize = onResize;
+
+      onResize();
+    });
+
+    treeCanvasMousemove = function(e) {
+      treeCanvas.onMouseMove(e);
+    }
+
+    treeCanvasMousedown = function(e) {
+      treeCanvas.onMouseDown(e);
+    }
+
+    treeCanvasMouseup = function(e) {
+      treeCanvas.onMouseUp(e);
+    }
+
+    onResize = function() {
+      var mainDiv = jq("#mainDiv");
+      treeCanvas.onResize(mainDiv);
+    }
+
+    function getMousePoint(e) {
+      return new Point(e.offsetX, e.offsetY);
+    }
+
+    function toggleSnapToGrid() {
+      treeCanvas.mainMouseListener.snapToGrid = jq("#snapToGrid").attr('checked');
+    }
+
+    function toggleHighlightEdges() {
+      treeCanvas.highlightEdges = jq("#highlightEdges").attr('checked');
+      treeCanvas.onRepaint();
+    }
+
+    function toggleShowDebugInfo() {
+      treeCanvas.showDebugInfo = jq("#showDebugInfo").attr('checked');
+      treeCanvas.onRepaint();
+    }
+
+    function hexToR(h) {return parseInt((cutHex(h)).substring(0,2),16)}
+    function hexToG(h) {return parseInt((cutHex(h)).substring(2,4),16)}
+    function hexToB(h) {return parseInt((cutHex(h)).substring(4,6),16)}
+    function cutHex(h) {return (h.charAt(0)=="#") ? h.substring(1,7):h}
+
+    </script>
+  </head>
+
+  <body style="background-color: black; margin: 5; padding: 0">
+    <div id="mainDiv" style="width:100%; height: 100%;">
+      <table>
+        <tr>
+          <td rowspan="3">
+            <canvas id="canvas" onmousedown="return false;" oncontextmenu="return false;" style="background-color: EEEEFF;"></canvas>
+          </td>
+          <td><div id="backgroundColorPicker"></div></td>
+        </tr>
+        <tr><td><div id="startColorPicker"></div></td></tr>
+        <tr><td><div id="endColorPicker"></div></td></tr>
+
+      </table>
+
+      <div>
+        <input type=checkbox id="snapToGrid"     onchange="toggleSnapToGrid();" />Salami
+        <input type=checkbox id="highlightEdges" onchange="toggleHighlightEdges();" />Salami
+        <input type=checkbox id="showDebugInfo" onchange="toggleShowDebugInfo();" />Salami
+      </div>
+
+      <div id="branchCountDiv">
+        <input type="text" id="branchCount" class="leftfloat"/>
+        <div id="branchCountIncrease" class="leftfloat bcButton bcIncrease"></div>
+        <div id="branchCountDecrease" class="leftfloat bcButton bcDecrease"></div>
+      </div>
+    </div>
+  </body>
 </html>
