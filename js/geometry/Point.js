@@ -1,14 +1,14 @@
 var Point = new Class({
-  
+
   initialize: function(x, y) {
     this.x = x;
-    this.y = y;  
+    this.y = y;
   },
-  
+
   equals: function(point) {
     return this.x == point.x && this.y == point.y;
   },
-  
+
   rotate: function(matrix) {
     return new Point(this.x * matrix[0] + this.y * matrix[1], this.x * matrix[2] + this.y * matrix[3]);
   },

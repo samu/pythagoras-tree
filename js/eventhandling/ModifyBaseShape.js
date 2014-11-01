@@ -2,29 +2,29 @@ var ModifyBaseShape = new Class({
 
   initialize: function(mainMouseListener) {
     this.designatedBoundingBoxes = new Array();
-    this.selectedPoint = null;    
+    this.selectedPoint = null;
     this.involvedLine = null;
     this.isExistingPoint = false;
     this.mousePoint = new Point(0,0);
-    
+
     this.drawSelectedPoint = new DrawSelectedPoint(this);
     this.drawDesignatedBoundingBoxes = new DrawDesignatedBoundingBoxes();
     this.drawDesignatedBoundingBoxesCount = new DrawDesignatedBoundingBoxesCount();
-    
+
     this.mouseDown = false;
-    
+
     this.mainMouseListener = mainMouseListener;
   },
-  
+
   onRepaint: function() {
     this.mainMouseListener.treeCanvas.addDrawingStrategy(this.drawSelectedPoint);
   },
-  
+
   onMouseDown: function(mouseEvent) {
     this.mouseDown = true;
-    
+
     this.updateSelectedPoint(this.mousePoint);
-    
+
     if (mouseEvent.button == 2 && this.isExistingPoint && this.mainMouseListener.treeCanvas.basePolygon.edges.length > 4) {
       var newEdges = new Array();
       var counter = 0;
@@ -59,7 +59,7 @@ var ModifyBaseShape = new Class({
           newEdges[counter] = new Point(point.x, point.y);
           if (point == this.involvedLine.p1) {
             newEdges[++counter] = new Point(this.mousePoint.x, this.mousePoint.y);
-            this.selectedPoint = newEdges[counter]; 
+            this.selectedPoint = newEdges[counter];
             for (var i = 0; i < 4; i++) {
               if (this.mainMouseListener.treeCanvas.corners[i] >= counter) {
                 this.mainMouseListener.treeCanvas.corners[i] = this.mainMouseListener.treeCanvas.corners[i] + 1;
@@ -73,11 +73,11 @@ var ModifyBaseShape = new Class({
       }
     }
   },
-  
+
   onMouseUp: function(mouseEvent) {
     this.mouseDown = false;
   },
-  
+
   onMouseDrag: function(mouseEvent) {
     if (this.selectedPoint != null) {
       this.selectedPoint.x = this.mousePoint.x;
@@ -86,13 +86,13 @@ var ModifyBaseShape = new Class({
         var before = null;
         var after = null;
         for (var i = 0; i < this.mainMouseListener.treeCanvas.basePolygon.edges.length; i++) {
-          var point = this.mainMouseListener.treeCanvas.basePolygon.edges[i]; 
+          var point = this.mainMouseListener.treeCanvas.basePolygon.edges[i];
           if (point != this.selectedPoint) {
             if (point.x - this.mainMouseListener.tolerance < this.selectedPoint.x && point.x + this.mainMouseListener.tolerance > this.selectedPoint.x) {
-              this.selectedPoint.x = point.x;            
+              this.selectedPoint.x = point.x;
             }
             if (point.y - this.mainMouseListener.tolerance < this.selectedPoint.y && point.y + this.mainMouseListener.tolerance > this.selectedPoint.y) {
-              this.selectedPoint.y = point.y;  
+              this.selectedPoint.y = point.y;
             }
           } else {
             before = this.mainMouseListener.treeCanvas.basePolygon.edges[getIndex(i - 1, this.mainMouseListener.treeCanvas.basePolygon.edges.length)];
@@ -122,18 +122,18 @@ var ModifyBaseShape = new Class({
       this.updateSelectedPoint(this.mousePoint);
     }
   },
-  
+
   updateDesignatedBoundingBoxes: function() {
     this.designatedBoundingBoxes = new Array();
     var indexX = Math.floor((this.mousePoint.x - this.mainMouseListener.bigBB.p1.x) / this.mainMouseListener.boundingBoxGrid.divWidth);
     var indexY = Math.floor((this.mousePoint.y - this.mainMouseListener.bigBB.p1.y) / this.mainMouseListener.boundingBoxGrid.divHeight);
-    
+
     if (indexX >= 0 && indexX < this.mainMouseListener.gridDivs && indexY >= 0 && indexY < this.mainMouseListener.gridDivs && this.mainMouseListener.boundingBoxGrid.grid[indexX][indexY] != null) {
       this.designatedBoundingBoxes = this.mainMouseListener.boundingBoxGrid.grid[indexX][indexY];
     }
   },
-  
-  updateSelectedPoint: function(mousePoint) {    
+
+  updateSelectedPoint: function(mousePoint) {
     var smallestDistance = this.mainMouseListener.tolerance;
     var finalClosestPoint = null;
     for (var i = 0; i < this.designatedBoundingBoxes.length; i++) {
@@ -153,7 +153,7 @@ var ModifyBaseShape = new Class({
         } else {
           this.isExistingPoint = false;
         }
-      }    
+      }
     }
     var distance = BasicMath.calculateDistance(this.mainMouseListener.treeCanvas.edge, this.mousePoint);
     if (distance < smallestDistance) {
@@ -163,7 +163,7 @@ var ModifyBaseShape = new Class({
     }
     this.selectedPoint = finalClosestPoint;
   },
-  
+
   getIndex: function(unsafeIndex, length) {
     if (unsafeIndex < 0) {
       return length + unsafeIndex - 1;
@@ -176,13 +176,13 @@ var ModifyBaseShape = new Class({
 
 });
 
-var DrawSelectedPoint = new Class({    
+var DrawSelectedPoint = new Class({
   initialize: function(obj) {
     this.obj = obj;
   },
-  
+
   draw: function(canvas) {
-    if (this.obj.selectedPoint != null) {        
+    if (this.obj.selectedPoint != null) {
       canvas.fillStyle = "rgba(255, 0, 0, 1)";
       var r = 3;
       canvas.beginPath();
@@ -193,7 +193,7 @@ var DrawSelectedPoint = new Class({
   }
 });
 
-var DrawDesignatedBoundingBoxes = new Class({      
+var DrawDesignatedBoundingBoxes = new Class({
   draw: function(canvas) {
     canvas.fillStyle = "rgba(255, 0, 0, 1)";
     canvas.strokeStyle = "red";
@@ -203,11 +203,11 @@ var DrawDesignatedBoundingBoxes = new Class({
   }
 });
 
-var DrawDesignatedBoundingBoxesCount = new Class({      
+var DrawDesignatedBoundingBoxesCount = new Class({
   draw: function(canvas) {
     canvas.fillStyle = "rgba(255, 0, 0, 1)";
     canvas.strokeStyle = "red";
     canvas.fillText(designatedBoundingBoxes.length, 2,30);
-    
+
   }
 });

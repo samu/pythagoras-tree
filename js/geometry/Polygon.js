@@ -1,9 +1,9 @@
 var Polygon = new Class({
-  
+
   initialize: function(edges) {
-    this.edges = edges;  
+    this.edges = edges;
   },
-  
+
   rotate: function(matrix) {
     var newedges = new Array();
     for (var i = 0; i < this.edges.length; i++) {
@@ -39,7 +39,7 @@ var Polygon = new Class({
     }
     return new Polygon(newedges);
   },
-  
+
   scaleCentered: function(vector) {
     //var boundingBox = BasicMath.getBoundingBox(this);
     //var center = new Point(boundingBox[0] + boundingBox[2] / 2, boundingBox[1] + boundingBox[3] / 2);
@@ -56,5 +56,5 @@ var Polygon = new Class({
     canvas.fill();
     canvas.closePath();
   }
-  
+
 });
